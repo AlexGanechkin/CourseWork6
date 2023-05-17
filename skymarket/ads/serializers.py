@@ -27,16 +27,28 @@ class CommentSerializer(serializers.ModelSerializer):
 class AdSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ad
-        fields = ['pk', 'title', 'author']
+        fields = ['pk', 'title', 'author', 'description', 'image', 'price']
 
 
 class AdDetailSerializer(serializers.ModelSerializer):
+    author_id = serializers.IntegerField(source='author.id', read_only=True)
     author_first_name = serializers.SerializerMethodField()
     author_last_name = serializers.CharField(source='author.last_name', read_only=True)
+    phone = serializers.CharField(source='author.phone', read_only=True)
 
     def get_author_first_name(self, obj):
         return obj.author.first_name
 
     class Meta:
         model = Ad
-        fields = '__all__'
+        fields = [
+            'pk',
+            'title',
+            'description',
+            'author_id',
+            'price',
+            'author_first_name',
+            'author_last_name',
+            'image',
+            'phone'
+        ]

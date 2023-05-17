@@ -13,6 +13,7 @@ class UserManager(BaseUserManager):
     """
 
     def create_user(self, email, first_name, last_name, phone, role=UserRoles.USER, password=None):
+        # для выполнения задания по редоку необходимо добавить поле image в обязательные
         if not email:
             raise ValueError('Users must have an email address')
         user = self.model(
@@ -20,7 +21,8 @@ class UserManager(BaseUserManager):
             first_name=first_name,
             last_name=last_name,
             phone=phone,
-            role=role
+            role=role,
+            image=None
         )
         user.is_active = True
         user.set_password(password)

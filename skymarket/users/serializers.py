@@ -10,7 +10,6 @@ class UserRegistrationSerializer(BaseUserRegistrationSerializer):
         model = User
         #fields = '__all__'
         fields = ['email', 'first_name', 'last_name', 'password', 'phone', 'image']
-        # TODO Как переопределить поле на значение по умолчанию? (дефолтная картинка)
 
 
 class CurrentUserSerializer(serializers.ModelSerializer):
